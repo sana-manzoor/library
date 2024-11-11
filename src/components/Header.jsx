@@ -12,10 +12,9 @@ function Header() {
   }
   return (
     <>
-    <div style={{height:'67px',backgroundColor:'purple'}} className='d-flex justify-content-center'>
+    <div style={{marginTop:'67px'}} className='d-flex justify-content-end'>
       
-    <Link to={'/log'}><button  className='btn btn-dark btn-lg me-5 p-3'>Log In</button></Link> 
-        <button onClick={logOut} className='btn btn-dark btn-lg '>Log out</button>
+        <button onClick={logOut} className='btn btn-primary me-3 '>Log out</button>
       
     </div>
     </>

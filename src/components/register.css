@@ -1,0 +1,23 @@
+span{
+    color: red;
+    font-size: large;
+    display:none
+}
+
+input:invalid[focus = true] ~ span{
+    display: block;
+}
+
+.form-container {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container .form-text {
+    color: #6c757d;
+    font-size: 0.85em;
+}

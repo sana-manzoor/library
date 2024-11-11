@@ -17,10 +17,8 @@ export const addBookApi=async(data,headers)=>{
     return await commonApi("POST",`${BASE_URL}/book/add`,data,headers)
 }
 
-//to getbooks
-export const bookList=async(headers)=>{
-    return await commonApi("GET",`${BASE_URL}/allbooks`,'',headers)
-}
+
+
 
 //to getstudents
 export const studentsList=async(headers)=>{
@@ -46,8 +44,13 @@ export const editBookApi=async(header,data,id)=>{
 
 
 //to getbooks
-export const studbookList=async()=>{
-    return await commonApi("GET",`${BASE_URL}/allbooks`,'','')
+export const studbookList=async(search)=>{
+    return await commonApi("GET",`${BASE_URL}/allbooks?search=${search}`,'','')
+}
+
+//to getbookslist
+export const booklist=async()=>{
+    return await commonApi("GET",`${BASE_URL}/allbooksadm`,'','')
 }
 
 //to add booking
@@ -88,6 +91,27 @@ export const upStatus=async(id,data)=>{
 }
 
 
+//to get student
+export const getstud=async(id)=>{
+    return await commonApi("GET",`${BASE_URL}/get/${id}`,'','')
+}
+
+
+//to update book
+export const editStudApi=async(header,data,id)=>{
+    return await commonApi("PUT",`${BASE_URL}/std/edit/${id}`,data,header)
+}
+
+
+//get useremail
+export const getuseremail=async(data)=>{
+    return await commonApi("PUT",`${BASE_URL}/getem`,data,'')
+}
+
+//change password
+export const changePassword=async(id,data)=>{
+    return await commonApi("PUT",`${BASE_URL}/changep/${id}`,data,'')
+}
 
 
 

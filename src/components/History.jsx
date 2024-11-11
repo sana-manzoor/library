@@ -4,6 +4,7 @@ import { getHis } from '../services/allApis'
 import { Modal, Button } from 'react-bootstrap'
 import { bookretrn } from '../services/allApis'
 import { editHistoryResponseContext } from '../context/ContextShare'
+import { toast } from 'react-toastify'
 
 function History({ user }) {
 
@@ -14,7 +15,7 @@ function History({ user }) {
     })
 
     
-    const {editHistoryResponse,setEditHistoryResponse}=useContext(editHistoryResponseContext)
+    // const {editHistoryResponse,setEditHistoryResponse}=useContext(editHistoryResponseContext)
 
     const [show, setShow] = useState(false);
 
@@ -41,6 +42,7 @@ function History({ user }) {
         let returndate = `${date}-${month}-${year}`
       
         setDatas({...datas,returndate })
+        
     }
 
 
@@ -49,12 +51,12 @@ function History({ user }) {
         const rest = await bookretrn(id,datas)
         console.log(rest)
         if(rest.status==200){
-            setEditHistoryResponse(rest.data)
+           
             getHistory()
-            alert("book succesfully returned")
+            toast.success("book succesfully returned")
         }
             else{
-                alert(rest.response.data)
+                toast.error(rest.response.data)
               }
        
 
@@ -74,7 +76,7 @@ function History({ user }) {
     return (
         <>
 
-            <button className='btn btn-outline-dark btn-lg p-3 me-5' onClick={getHistory} >
+            <button className='btn btn-primary pe-2 ' onClick={getHistory} >
                 View History
             </button>
 

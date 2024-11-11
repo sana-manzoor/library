@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import { addBookApi } from '../services/allApis'
+import { toast } from 'react-toastify'
 
 function Bookadd() {
 
@@ -18,6 +19,8 @@ function Bookadd() {
           setToken(localStorage.getItem("token"))
         }
       }, [])
+
+
     
 console.log(token)
 
@@ -53,13 +56,13 @@ console.log(token)
       console.log(res);
       if (res.status === 200) {
         // setAddProjectResponse(res.data)
-        alert("book added successfully..!!")
+        toast.success("book added successfully..!!")
         setBookData({ title:" ", author:" ", description:" ",category:" ",cover:" ",number:" " })
        
         // navigate('/admindashboard')
       }
       else {
-        alert("Book adding failed..!!")
+        toast.error("Book adding failed..!!")
       }
 
 

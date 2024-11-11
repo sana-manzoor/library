@@ -1,37 +1,23 @@
 import React, { useState, createContext } from 'react'
 
-export const editHistoryResponseContext = createContext()
-
-export const editStatusResponseContext = createContext()
-
-
+export const editBookResponseContext = createContext()
 
 
 function ContextShare({ children }) {
 
-  const [editHistoryResponse, setEditHistoryResponse] = useState({})
-
-  const [editStatusResponse, setEditStatustResponse] = useState({})
-
+  const [editBookResponse, setEditBookResponse] = useState({})
 
   return (
     <>
-      
-
-      <editHistoryResponseContext.Provider value={{editHistoryResponse ,setEditHistoryResponse}}>
-        <editStatusResponseContext.Provider value={{editStatusResponse ,setEditStatustResponse}}>
+      <editBookResponseContext.Provider value={{editBookResponse ,setEditBookResponse}}>
+        
             {children}
-        </editStatusResponseContext.Provider>
-      </editHistoryResponseContext.Provider>
+    
+      </editBookResponseContext.Provider>
 
     </>
   )
 }
-
-
-
-
-
 
 
 export default ContextShare

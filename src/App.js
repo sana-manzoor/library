@@ -13,6 +13,11 @@ import Editbook from './components/Editbook';
 import User from './pages/User';
 import History from './components/History';
 import Viewreservation from './components/Viewreservation';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Editprofile from './components/Editprofile';
+import Forgotp from './components/Forgotp';
+import Changep from './components/Changep';
 
 function App() {
   return (
@@ -30,9 +35,13 @@ function App() {
         <Route path='/editb' element={<Editbook/>}/>
         <Route path='/user' element={<User/>}/>
         <Route path='/reservelist' element={<Viewreservation/>}/>
-        {/* <Route path='/history' element={<History/>}/> */}
+        <Route path='/editprof' element={<Editprofile/>}/>
+        <Route path='/forgotp' element={<Forgotp/>}/>
+        <Route path='/changep' element={<Changep/>}/>
+
       </Routes>
-      <Footer/>
+      <ToastContainer/>
+      {/* <Footer/> */}
      
     </div>
   );

@@ -1,21 +1,22 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState ,useContext} from 'react'
 import { Table } from 'react-bootstrap'
-import { bookList } from '../services/allApis'
+import { booklist } from '../services/allApis'
 import { bookDelete } from '../services/allApis'
 import Editbook from './Editbook'
+import { toast } from 'react-toastify'
+import { editBookResponseContext } from '../context/ContextShare'
 
 function Viewbook() {
 
   const [books,setBooks]=useState([])
   const [token,setToken]=useState("")
+  const {editBookResponse,setEditBookResponse}=useContext(editBookResponseContext)
 
   const allBooks=async()=>{
    
-      const reqHeader = {
-          "Content-Type": "application/json", "Authorization": `Bearer ${token}`
-      }
+    
       // console.log(reqHeader)
-      const result = await bookList(reqHeader)
+      const result = await booklist()
       console.log(result)
       if (result.status === 200) {
           console.log(result.data)
@@ -36,10 +37,10 @@ function Viewbook() {
           console.log(result.data)
           allBooks()
           // setStudents(result.data)
-          alert("delete successfull")
+          toast.success("delete successfull")
       }
       else{
-          alert("deletion failed")
+          toast.error("deletion failed")
       }
   }
 
@@ -49,12 +50,13 @@ function Viewbook() {
       }
       allBooks()
 
-    },[])
+    },[editBookResponse])
 
 
   return (
     <>
     <h2 className='text-center m-5 display-6'>List of Books</h2>
+    <div className="table-responsive container">
      <Table striped bordered hover>
       <thead>
         <tr>
@@ -85,6 +87,7 @@ function Viewbook() {
        
       </tbody>
     </Table>
+    </div>
     </>
   )
 }

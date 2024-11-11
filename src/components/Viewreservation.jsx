@@ -4,6 +4,7 @@ import { bookinglist } from '../services/allApis'
 import { bookincr } from '../services/allApis'
 import { upStatus } from '../services/allApis'
 import { editStatusResponseContext } from '../context/ContextShare'
+import { toast } from 'react-toastify'
 
 function Viewreservation() {
 
@@ -13,7 +14,7 @@ function Viewreservation() {
         status: "approved"
     })
 
-    const {editStatusResponse,setEditStatusResponse}=useContext(editStatusResponseContext)
+ 
 
 
     const bbookings = async () => {
@@ -40,7 +41,7 @@ function Viewreservation() {
             console.log(result1)
 
           
-                alert("Book Approved Successfullly!!")
+                toast.success("Book Approved Successfullly!!")
                 bbookings()
             
 
@@ -48,7 +49,7 @@ function Viewreservation() {
         }
        
         else {
-            alert(res.response.data)
+            toast.error(res.response.data)
         }
 
 
@@ -69,12 +70,13 @@ function Viewreservation() {
 
     useEffect(() => {
         bbookings()
-    }, [editStatusResponse])
+    }, [])
 
     console.log(list)
     return (
         <>
-            <h2 className='text-center m-5 display-6'>List of Students</h2>
+            <h2 className='text-center m-5 display-6'>List of Reservations</h2>
+            <div className="table-responsive container">
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -116,6 +118,7 @@ function Viewreservation() {
                     }
                 </tbody>
             </Table>
+            </div>
 
         </>
     )

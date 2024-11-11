@@ -6,12 +6,15 @@ import { bookdecr } from '../services/allApis'
 import { bookingadd } from '../services/allApis'
 import { Link } from 'react-router-dom'
 import History from '../components/History'
+import { toast } from 'react-toastify'
 
 
 function User() {
 
 
     const [list, setList] = useState([])
+
+    const [search,setSearch]=useState("")
 
 
 
@@ -28,6 +31,8 @@ function User() {
         setData({ ...data, bookingdate })
     }
 
+    
+
     const stud=()=>{
         if (localStorage.getItem("currentUser")) {
             const studentid = JSON.parse(localStorage.getItem("currentUser"))
@@ -41,7 +46,7 @@ function User() {
     const allBooks = async () => {
 
         // console.log(reqHeader)
-        const result = await studbookList()
+        const result = await studbookList(search)
         console.log(result)
         if (result.status === 200) {
             // console.log(result.data)
@@ -88,7 +93,7 @@ function User() {
             const result1 = await bookdecr(bookid)
             console.log(result1)
            
-                 alert("Reservation Successfull!!")
+                 toast.success("Reservation Successfull!!")
 
         }
         else if(res1.status === 400) {
@@ -96,7 +101,7 @@ function User() {
                
         }
         else{
-            alert(res1.response.data)
+            toast.error(res1.response.data)
         }
         // // console.log(res1)
     }
@@ -120,7 +125,7 @@ function User() {
         setdate()
     
 
-    }, [])
+    }, [search])
 
     
 
@@ -137,7 +142,12 @@ function User() {
 
           <div className='text-end'>
           <History user={data}/>
+          <button className='btn btn-primary pe-2 m-2 '><Link className='text-light text-decoration-none' to={'/editprof'}>Edit Profile</Link></button>
+          
 
+          </div>
+          <div className='container'>
+            <input type="text " placeholder='Search your favourite books here..' className='form-control rounded' onChange={(e)=>setSearch(e.target.value)} />
           </div>
            
 

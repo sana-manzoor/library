@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Modal, Button, Form, Row, Col } from 'react-bootstrap'
 import { BASE_URL } from '../services/base_url';
 import { editBookApi } from '../services/allApis';
+import { toast } from 'react-toastify';
+import { editBookResponseContext } from '../context/ContextShare';
 
 function Editbook({ book }) {
 
@@ -16,6 +18,8 @@ function Editbook({ book }) {
     const [token, setToken] = useState("")
 
     const [preview, setPreview] = useState("")
+
+    const {editBookResponse,setEditBookResponse}=useContext(editBookResponseContext)
 
 
     const [editData, setEditData] = useState({
@@ -40,7 +44,7 @@ function Editbook({ book }) {
 
     const updateBook = async () => {
         if (!editData.title || !editData.author || !editData.description || !editData.category || !editData.cover || !editData.number) {
-           alert("Enter Valid Values!!")
+           toast.warning("Enter Valid Values!!")
 
         }
         else {
@@ -62,12 +66,12 @@ function Editbook({ book }) {
                 const res=await  editBookApi(reqHeader,bData,book._id)
                 console.log(res)
                 if(res.status==200){
-           
-                  alert("Book item Updated Successfully!!")
+                    setEditBookResponse(res.data)
+                  toast.success("Book item Updated Successfully!!")
                   handleClose()
                 }
                 else{
-                  alert(res.response)
+                  toast.error(res.response)
                 }
               }
               else {
@@ -77,12 +81,12 @@ function Editbook({ book }) {
                 const res=await editBookApi(reqHeader,bData,book._id)
                 console.log(res)
                 if(res.status==200){
-               
-                 alert("book Updated Successfully!!")
+               setEditBookResponse(res.data)
+                 toast.success("book Updated Successfully!!")
                    handleClose()
                 }
                 else{
-                 alert(res.response)
+                 toast.error(res.response)
                 }
              }
             
